@@ -13,27 +13,38 @@
 		<div layout="row" class="full-height">
 
 			<div class="fill-height" flex>
-				<md-toolbar>
-				  <h2 class="md-toolbar-tools">
-					<span>Code</span>
-				  </h2>
+				<md-toolbar class="shadow" class="md-hue-2">
+					<div class="md-toolbar-tools">
+						<h2>
+							<span>Code</span>
+						</h2>
+					</div>
 				</md-toolbar>
 				<md-content class="editor-view">
 					<div ui-ace="aceOptions" ng-model="editorCode"></div>
 				</md-content>
 			</div>
 
-			<md-button class="md-fab fab-run" aria-label="Run" ng-click="run()">
-				<md-icon>play_arrow</md-icon>
-			</md-button>
-
 			<div class="fill-height" flex>
-				<md-toolbar>
-				  <h2 class="md-toolbar-tools">
-					<span>Files</span>
-				  </h2>
+				<md-toolbar class="shadow">
+					<div class="md-toolbar-tools">
+						<h2>
+							<span>Files</span>
+						</h2>
+						<span flex></span>
+						<md-menu>
+							<md-button class="md-icon-button" aria-label="More" ng-click="$mdOpenMenu()">
+								<md-icon>more_vert</md-icon>
+							</md-button>
+							<md-menu-content width="6">
+								<md-menu-item>
+									<md-button ng-click="files = []"> <span md-menu-align-target> Clear </span> </md-button>
+								</md-menu-item>
+							</md-menu-content>
+						</md-menu>
+					</div>
 				</md-toolbar>
-				<md-content holder class="file-view">
+				<md-content holder class="file-view shadow">
 					<md-icon class="file-hover-only drop-icon">open_in_browser</md-icon>
 					<md-list class="file-list">
 					  <md-list-item class="md-2-line" ng-repeat="(index, file) in files">
@@ -46,6 +57,10 @@
 					</md-list>
 				</md-content>
 			</div>
+
+			<md-button class="md-fab fab-run" aria-label="Run" ng-click="run()">
+				<md-icon>play_arrow</md-icon>
+			</md-button>
 		</div>
 
 		<script type="text/javascript" src="bower_components/ace-builds/src-min-noconflict/ace.js"></script>
