@@ -16,7 +16,7 @@ angular.module('$fs', []).factory('$fs', [function(){
 			if (!path)
 				console.log("Renaming '" + oldName + "' to '" + newName + "'");
 			else {
-				var newPath = path.dirname(oldPath) + newName;
+				var newPath = path.dirname(oldPath) + '/' + newName;
 				this.renamePath(oldPath, newPath);
 			}
 		}
