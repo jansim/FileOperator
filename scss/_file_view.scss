@@ -1,3 +1,6 @@
-.file-hover {
-	background-color: red !important;
+.file-view {
+	background-color: $m-light-blue;
+	&.file-hover {
+		background-color: $m-orange;
+	}
 }

@@ -23,7 +23,6 @@ angular
 		}
 	};
 
-
 	function aceChanged() {
 		var extraFunctionBody = "\nreturn handleFilename(_filename);";
 		try {

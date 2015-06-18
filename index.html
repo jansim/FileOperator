@@ -12,10 +12,10 @@
 	<body ng-controller="MainCtrl">
 		<div layout="row" layout-sm="column">
 
-			<div flex>
+			<div class="editor-view" flex>
 				<md-toolbar>
 				  <h2 class="md-toolbar-tools">
-				    <span>Code</span>
+					<span>Code</span>
 				  </h2>
 				</md-toolbar>
 				<md-content>
@@ -27,19 +27,20 @@
 				<md-icon>play_arrow</md-icon>
 			</md-button>
 
-			<div flex>
+			<div class="file-view" holder flex>
 				<md-toolbar>
 				  <h2 class="md-toolbar-tools">
-				    <span>Files</span>
+					<span>Files</span>
 				  </h2>
 				</md-toolbar>
 
 				<md-list>
-				  <md-list-item class="md-2-line" ng-repeat="file in files">
-				    <div class="md-list-item-text">
-				      <h3>{{file.name}} => {{preview(file.name)}}</h3>
-				      <p>{{file.path}}</p>
-				    </div>
+				  <md-list-item class="md-2-line" ng-repeat="(index, file) in files">
+						<div class="md-list-item-text">
+							<h3>"{{file.name}}" <md-icon>keyboard_arrow_right</md-icon> "{{preview(file.name)}}"</h3>
+							<p>{{file.path}}</p>
+							<md-icon ng-click="files.pop(index)" class="md-secondary md-warn">clear</md-icon>
+						</div>
 				  </md-list-item>
 				</md-list>
 			</div>

@@ -9,5 +9,7 @@
 .ace_editor {
   min-height: 500px; }
 
-.file-hover {
-  background-color: red !important; }
+.file-view {
+  background-color: #03A9F4; }
+  .file-view.file-hover {
+    background-color: #FF9800; }
