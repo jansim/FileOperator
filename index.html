@@ -34,7 +34,8 @@
 				  </h2>
 				</md-toolbar>
 				<md-content holder class="file-view">
-					<md-list>
+					<md-icon class="file-hover-only drop-icon">open_in_browser</md-icon>
+					<md-list class="file-list">
 					  <md-list-item class="md-2-line" ng-repeat="(index, file) in files">
 							<div class="md-list-item-text">
 								<h3>"{{file.name}}" <md-icon>keyboard_arrow_right</md-icon> "{{preview(file.name)}}"</h3>

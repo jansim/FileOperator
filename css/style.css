@@ -22,5 +22,20 @@
 
 .file-view {
   background-color: #03A9F4; }
-  .file-view.file-hover {
-    background-color: #FF9800; }
+
+.file-hover-only {
+  visibility: hidden; }
+
+.file-hover {
+  background-color: #FFC107; }
+  .file-hover .file-hover-only {
+    visibility: visible; }
+
+.drop-icon {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  color: #FF9800;
+  font-size: 25vw;
+  margin-top: -12.5vw;
+  text-align: center; }

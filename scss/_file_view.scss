@@ -1,6 +1,21 @@
 .file-view {
 	background-color: $m-light-blue;
-	&.file-hover {
-		background-color: $m-orange;
+}
+.file-hover-only {
+	visibility: hidden;
+}
+.file-hover {
+	background-color: $m-light-orange;
+	.file-hover-only {
+		visibility: visible;
 	}
+}
+.drop-icon {
+	position: absolute;
+	top: 50%;
+	width: 100%;
+	color: $m-orange;
+	font-size: 25vw;
+	margin-top: -12.5vw;
+	text-align: center;
 }
