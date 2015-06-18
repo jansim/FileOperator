@@ -21,6 +21,8 @@
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.75); }
 
 .ace_editor {
+  font-family: "Roboto Mono","Monaco","Menlo","Ubuntu Mono","Consolas","source-code-pro",monospace !important;
+  font-size: 14px !important;
   height: 100%; }
 
 .file-view {
