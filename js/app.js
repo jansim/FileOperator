@@ -52,7 +52,7 @@ angular
 			for (var i = 0; i < files.length; i++) {
 				$fs.renameFile(files[i].name, window.userFunction(files[i].name), files[i].path);
 			};
-			$scope.files = [];
+			$scope.clearFiles();
 		}
 	}
 
