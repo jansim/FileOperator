@@ -1,5 +1,5 @@
 angular
-.module('FileOperator', ['ngMaterial', 'ui.ace', 'holder'])
+.module('FileOperator', ['ngMaterial', 'ui.ace', 'holder', '$fs'])
 
 // Set the application theme
 // .config(function($mdThemingProvider) {
@@ -9,7 +9,7 @@ angular
 // })
 
 // MainPage Controller
-.controller('MainCtrl', function($scope, $rootScope) {
+.controller('MainCtrl', function($scope, $rootScope, $fs) {
 	// Safe Apply Function
 	// Only gets called when outside of digest cycle (use this only for functions which can be called by either angular or regular js)
 	$rootScope.safeApply = function(fn) {
@@ -33,18 +33,28 @@ angular
 
 				$scope.safeApply();
 			}
-			window.validUserFunction = true;
+			$scope.validUserFunction = true;
 		} catch(e) {
-			window.validUserFunction = false;
+			$scope.validUserFunction = false;
 		}
 	}
 
 	$scope.preview = function(input) {
-		if (window.validUserFunction)
+		if ($scope.validUserFunction)
 			return window.userFunction(input);
 		else
 			return "";
 	};
+
+	$scope.run = function() {
+		if ($scope.validUserFunction) {
+			var files = $scope.files;
+			for (var i = 0; i < files.length; i++) {
+				$fs.renameFile(files[i].name, window.userFunction(files[i].name), files[i].path);
+			};
+			$scope.files = [];
+		}
+	}
 
 	$scope.aceOptions = {
 		// useWrapMode : true,

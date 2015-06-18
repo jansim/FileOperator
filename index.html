@@ -10,39 +10,40 @@
 		<link rel="stylesheet" href="css/style.css">
 	</head>
 	<body ng-controller="MainCtrl">
-		<div layout="row" layout-sm="column">
+		<div layout="row" class="full-height">
 
-			<div class="editor-view" flex>
+			<div class="fill-height" flex>
 				<md-toolbar>
 				  <h2 class="md-toolbar-tools">
 					<span>Code</span>
 				  </h2>
 				</md-toolbar>
-				<md-content>
+				<md-content class="editor-view">
 					<div ui-ace="aceOptions" ng-model="editorCode"></div>
 				</md-content>
 			</div>
 
-			<md-button class="md-fab fab-run" aria-label="Run">
+			<md-button class="md-fab fab-run" aria-label="Run" ng-click="run()">
 				<md-icon>play_arrow</md-icon>
 			</md-button>
 
-			<div class="file-view" holder flex>
+			<div class="fill-height" holder flex>
 				<md-toolbar>
 				  <h2 class="md-toolbar-tools">
 					<span>Files</span>
 				  </h2>
 				</md-toolbar>
-
-				<md-list>
-				  <md-list-item class="md-2-line" ng-repeat="(index, file) in files">
-						<div class="md-list-item-text">
-							<h3>"{{file.name}}" <md-icon>keyboard_arrow_right</md-icon> "{{preview(file.name)}}"</h3>
-							<p>{{file.path}}</p>
-							<md-icon ng-click="files.pop(index)" class="md-secondary md-warn">clear</md-icon>
-						</div>
-				  </md-list-item>
-				</md-list>
+				<md-content class="file-view">
+					<md-list>
+					  <md-list-item class="md-2-line" ng-repeat="(index, file) in files">
+							<div class="md-list-item-text">
+								<h3>"{{file.name}}" <md-icon>keyboard_arrow_right</md-icon> "{{preview(file.name)}}"</h3>
+								<p>{{file.path}}</p>
+								<md-icon ng-click="files.pop(index)" class="md-secondary md-warn">clear</md-icon>
+							</div>
+					  </md-list-item>
+					</md-list>
+				</md-content>
 			</div>
 		</div>
 
@@ -53,6 +54,7 @@
 		<script src="bower_components/angular-aria/angular-aria.js"></script>
 		<script src="bower_components/angular-material/angular-material.js"></script>
 		<script src="js/holder.js"></script>
+		<script src="js/$fs.js"></script>
 		<script src="js/app.js"></script>
 	</body>
 </html>
