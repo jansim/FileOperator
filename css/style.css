@@ -1,21 +1,13 @@
-body {
-	margin: 0;
-}
-
-.ace_editor {
-	min-height: 500px;
-}
-
 .fab-run {
-	position: absolute;
-	bottom: 10px;
-	right: 10px;
-}
+  position: absolute;
+  bottom: 10px;
+  right: 10px; }
 
 .half-content {
-	height: 50%;
-}
+  height: 50%; }
+
+.ace_editor {
+  min-height: 500px; }
 
 .file-hover {
-	background-color: red !important;
-}
+  background-color: red !important; }

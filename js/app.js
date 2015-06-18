@@ -51,6 +51,7 @@ angular
 		// useWrapMode : true,
 		// showGutter: false,
 		mode: 'javascript',
+		showPrintMargin: false,
 		// onLoad: aceLoaded,
 		onChange: aceChanged
 	};
