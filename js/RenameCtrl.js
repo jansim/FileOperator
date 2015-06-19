@@ -1,5 +1,5 @@
 angular.module('FileOperator')
-.controller('RenameCtrl', function($scope, $rootScope, $fs, $fileList, $code) {
+.controller('RenameCtrl', function($scope, $rootScope, $fs, $fileList, $code, $userFunc) {
 
 	function resetCode() {
 		// Dynamically load default code
@@ -24,32 +24,20 @@ angular.module('FileOperator')
 		]
 	};
 
-	function aceChanged() {
-		var userScope = new UserScope($scope.editorCode);
-		if (userScope.valid) {
-			// code excuted w/o errors
-			var newUserFunction = userScope.getFunction('handleFilename');
-			if (typeof newUserFunction != 'undefined') {
-				// found a function
-				$rootScope.validUserFunction = true;
-
-				if (newUserFunction != window.userFunction) {
-					window.userFunction = newUserFunction;
-					$scope.safeApply();
-				}
-			} else $rootScope.validUserFunction = false; // function not found
-		} else $rootScope.validUserFunction = false; // error in userCode
-	}
-
-	$rootScope.run = function() {
-		if ($scope.validUserFunction) {
-			var files = $fileList.files;
-			for (var i = 0; i < files.length; i++) {
-				$fs.renameFile(files[i].name, window.userFunction(files[i].name), files[i].path);
-			};
-			$fileList.clearFiles();
+	function onEditorChange() {
+		if ($userFunc.setUserFunction($scope.editorCode, 'handleFilename')) {
+			$scope.safeApply();
 		}
+		$rootScope.validUserFunction = $userFunc.validUserFunction;
 	}
+
+	$userFunc.setWrapperFunction(function(userFunction, file, actualRun) {
+		if (actualRun) {
+			$fs.renameFile(file.name, userFunction(file.name), file.path);
+		} else {
+			return userFunction(file.name);
+		}
+	});
 
 	$scope.aceOptions = {
 		// useWrapMode : true,
@@ -57,6 +45,6 @@ angular.module('FileOperator')
 		mode: 'javascript',
 		showPrintMargin: false,
 		// onLoad: aceLoaded,
-		onChange: aceChanged
+		onChange: onEditorChange
 	};
 });

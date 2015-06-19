@@ -1,5 +1,5 @@
 angular.module('FileOperator')
-.controller('FileViewCtrl', function($scope, $rootScope, $fileList) {
+.controller('FileViewCtrl', function($scope, $rootScope, $fileList, $userFunc) {
 	$rootScope.files = $fileList.files;
 
 	$rootScope.fileView = {
@@ -12,13 +12,6 @@ angular.module('FileOperator')
 				title: 'Clear'
 			}
 		]
-	};
-
-	$scope.preview = function(input) {
-		if ($scope.validUserFunction)
-			return window.userFunction(input);
-		else
-			return null;
 	};
 
 	$scope.previewAvailable = function(path) {

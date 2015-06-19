@@ -1,5 +1,5 @@
 angular
-.module('FileOperator', ['ngMaterial', 'ngRoute', 'ui.ace', 'holder', '$fs', '$fileList', '$code'])
+.module('FileOperator', ['ngMaterial', 'ngRoute', 'ui.ace', 'holder', '$fs', '$fileList', '$code', '$userFunc'])
 
 // Set the application theme
 // .config(function($mdThemingProvider) {

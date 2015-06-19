@@ -1,6 +1,6 @@
 angular.module('FileOperator')
 // MainPage Controller
-.controller('MainCtrl', function($scope, $rootScope, $fs) {
+.controller('MainCtrl', function($scope, $rootScope, $fs, $userFunc, $fileList) {
 	// Safe Apply Function
 	// Only gets called when outside of digest cycle (use this only for functions which can be called by either angular or regular js)
 	$rootScope.safeApply = function(fn) {
@@ -12,5 +12,22 @@ angular.module('FileOperator')
 		} else {
 			this.$apply(fn);
 		}
+	};
+
+	$rootScope.run = function() {
+		if ($scope.validUserFunction) {
+			var files = $fileList.files;
+			for (var i = 0; i < files.length; i++) {
+				$userFunc.callWrapperFunction(files[i]);
+			};
+			$fileList.clearFiles();
+		}
+	}
+
+	$rootScope.preview = function(file) {
+		if ($scope.validUserFunction)
+			return $userFunc.previewWrapperFunction(file);
+		else
+			return null;
 	};
 });
