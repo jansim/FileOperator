@@ -1,6 +1,29 @@
 angular.module('FileOperator')
 .controller('RenameCtrl', function($scope, $rootScope, $fs, $fileList, $code) {
 
+	function resetCode() {
+		// Dynamically load default code
+		$code.get('rename').then(function(response) {
+			// Success
+			$scope.editorCode = response.data;
+		}, function() {
+			// Error
+		});
+	}
+	resetCode();
+
+	$rootScope.editorView = {
+		title: 'Code',
+		menu: [
+			{
+				action: function() {
+					resetCode();
+				},
+				title: 'Reset'
+			}
+		]
+	};
+
 	function aceChanged() {
 		var userScope = new UserScope($scope.editorCode);
 		if (userScope.valid) {
@@ -36,12 +59,4 @@ angular.module('FileOperator')
 		// onLoad: aceLoaded,
 		onChange: aceChanged
 	};
-
-	// Dynamically load default code
-	$code.get('rename').then(function(response) {
-		// Success
-		$scope.editorCode = response.data;
-	}, function() {
-		// Error
-	});
 });

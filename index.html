@@ -20,6 +20,17 @@
 						<h2>
 							<span>Code</span>
 						</h2>
+						<span flex></span>
+						<md-menu ng-if="editorView.menu">
+							<md-button class="md-icon-button" aria-label="More" ng-click="$mdOpenMenu()">
+								<md-icon>more_vert</md-icon>
+							</md-button>
+							<md-menu-content width="3">
+								<md-menu-item ng-repeat="(key, entry) in editorView.menu">
+									<md-button ng-click="entry.action()"> <span md-menu-align-target> {{entry.title}} </span> </md-button>
+								</md-menu-item>
+							</md-menu-content>
+						</md-menu>
 					</div>
 				</md-toolbar>
 				<md-content class="editor-view" ng-view></md-content>
@@ -29,16 +40,16 @@
 				<md-toolbar class="shadow">
 					<div class="md-toolbar-tools">
 						<h2>
-							<span>Files</span>
+							<span>{{fileView.title}}</span>
 						</h2>
 						<span flex></span>
-						<md-menu>
+						<md-menu ng-if="fileView.menu">
 							<md-button class="md-icon-button" aria-label="More" ng-click="$mdOpenMenu()">
 								<md-icon>more_vert</md-icon>
 							</md-button>
 							<md-menu-content width="3">
-								<md-menu-item>
-									<md-button ng-click="clearFiles()"> <span md-menu-align-target> Clear </span> </md-button>
+								<md-menu-item ng-repeat="(key, entry) in fileView.menu">
+									<md-button ng-click="entry.action()"> <span md-menu-align-target> {{entry.title}} </span> </md-button>
 								</md-menu-item>
 							</md-menu-content>
 						</md-menu>
