@@ -3,12 +3,13 @@
 }
 .file-hover-only {
 	visibility: hidden;
+	pointer-events: none;
 }
 .file-hover {
-	// background-color: $m-light-orange;
-	// .file-hover-only {
-	// 	visibility: visible;
-	// }
+	background-color: $m-light-orange;
+	.file-hover-only {
+		visibility: visible;
+	}
 }
 .drop-icon {
 	position: absolute;
