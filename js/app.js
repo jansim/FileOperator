@@ -24,19 +24,20 @@ angular
 	};
 
 	function aceChanged() {
-		var extraFunctionBody = "\nreturn handleFilename(_filename);";
-		try {
-			var newUserFunction = new Function('_filename', $scope.editorCode + extraFunctionBody);
-			if (newUserFunction != window.userFunction) {
-				var oldUserFunction = window.userFunction;
-				window.userFunction = newUserFunction;
+		var userScope = new UserScope($scope.editorCode);
+		if (userScope.valid) {
+			// code excuted w/o errors
+			var newUserFunction = userScope.getFunction('handleFilename');
+			if (typeof newUserFunction != 'undefined') {
+				// found a function
+				$scope.validUserFunction = true;
 
-				$scope.safeApply();
-			}
-			$scope.validUserFunction = true;
-		} catch(e) {
-			$scope.validUserFunction = false;
-		}
+				if (newUserFunction != window.userFunction) {
+					window.userFunction = newUserFunction;
+					$scope.safeApply();
+				}
+			} else $scope.validUserFunction = false; // function not found
+		} else $scope.validUserFunction = false; // error in userCode
 	}
 
 	$scope.preview = function(input) {
