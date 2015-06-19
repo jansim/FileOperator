@@ -14,6 +14,8 @@ angular.module('FileOperator')
 		]
 	};
 
+	$scope.removeFile = $fileList.removeFile;
+
 	$scope.previewAvailable = function(path) {
 		return $scope.validUserFunction;
 	}
