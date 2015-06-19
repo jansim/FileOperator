@@ -32,7 +32,15 @@ angular.module('FileOperator')
 	}
 
 	$userFunc.setWrapperFunction(function(userFunction, file, actualRun) {
-		var newName = userFunction(file.name);
+		var name = file.name;
+		var parts = name.split('.');
+		var extension = '';
+		if (parts.length > 1) {
+			extension = parts.pop();
+			if (parts.length == 1) name = parts[0];
+			else name = name.substr(0, name.length - (extension.length + 1));
+		}
+		var newName = userFunction(name, extension);
 		if (actualRun) {
 			if (typeof newName == 'string') $fs.renameFile(file.name, newName, file.path);
 		} else {
