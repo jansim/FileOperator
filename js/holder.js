@@ -13,7 +13,12 @@ angular.module('holder', []).directive('holder', ['$fs', function($fs){
 			scope.clearFiles = function() {
 				scope.files = [];
 				fileIds = [];
-			}
+			};
+
+			scope.removeFile = function(index) {
+				scope.files.pop(index);
+				fileIds.pop(index);
+			};
 
 			scope.addFile = function(file) {
 				console.log(file, file.name, file.path);
