@@ -1,5 +1,5 @@
 angular.module('FileOperator')
-.controller('RenameCtrl', function($scope, $rootScope, $fs, $fileList) {
+.controller('RenameCtrl', function($scope, $rootScope, $fs, $fileList, $code) {
 
 	function aceChanged() {
 		var userScope = new UserScope($scope.editorCode);
@@ -36,5 +36,12 @@ angular.module('FileOperator')
 		// onLoad: aceLoaded,
 		onChange: aceChanged
 	};
-	$scope.editorCode = "function handleFilename(filename) {\n\t\n\treturn filename;\n}";
+
+	// Dynamically load default code
+	$code.get('rename').then(function(response) {
+		// Success
+		$scope.editorCode = response.data;
+	}, function() {
+		// Error
+	});
 });
