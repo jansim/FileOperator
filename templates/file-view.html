@@ -2,7 +2,14 @@
 <md-list class="file-list">
   <md-list-item class="md-2-line" ng-repeat="(index, file) in files">
 		<div class="md-list-item-text">
-			<h3>"{{file.name}}" <md-icon>keyboard_arrow_right</md-icon> <span ng-show="previewAvailable(file)"> "{{preview(file)}}" </span> <md-icon ng-show="!previewAvailable(file.name)">report_problem</md-icon></h3>
+			<h3>
+				"{{file.name}}"
+				<span ng-if="previewEnabled">
+					<md-icon>keyboard_arrow_right</md-icon>
+					<span ng-show="previewAvailable(file)"> "{{preview(file)}}" </span>
+					<md-icon ng-show="!previewAvailable(file.name)">report_problem</md-icon>
+				</span>
+			</h3>
 			<p>{{file.path}}</p>
 			<md-icon ng-click="removeFile(index)" class="md-secondary md-warn">clear</md-icon>
 		</div>

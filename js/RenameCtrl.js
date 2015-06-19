@@ -23,6 +23,7 @@ angular.module('FileOperator')
 			}
 		]
 	};
+	$rootScope.previewEnabled = true;
 
 	function onEditorChange() {
 		if ($userFunc.setUserFunction($scope.editorCode, 'generateNewFilename')) {
