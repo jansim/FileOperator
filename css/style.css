@@ -20,6 +20,10 @@
 .shadow {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.75); }
 
+.toolbar-select {
+  font-size: 20px;
+  text-transform: none; }
+
 .ace_editor {
   font-family: "Roboto Mono","Monaco","Menlo","Ubuntu Mono","Consolas","source-code-pro",monospace !important;
   font-size: 13px !important;

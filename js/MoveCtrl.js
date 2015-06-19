@@ -1,9 +1,9 @@
 angular.module('FileOperator')
-.controller('RenameCtrl', function($scope, $rootScope, $fs, $code, $userFunc) {
+.controller('MoveCtrl', function($scope, $rootScope, $fs, $code, $userFunc) {
 
 	function resetCode() {
 		// Dynamically load default code
-		$code.get('rename').then(function(response) {
+		$code.get('move').then(function(response) {
 			// Success
 			$scope.editorCode = response.data;
 		}, function() {
@@ -13,7 +13,7 @@ angular.module('FileOperator')
 	resetCode();
 
 	$rootScope.editorView = {
-		title: 'Rename Files',
+		title: 'Move Files',
 		menu: [
 			{
 				action: function() {
@@ -25,18 +25,18 @@ angular.module('FileOperator')
 	};
 
 	function onEditorChange() {
-		if ($userFunc.setUserFunction($scope.editorCode, 'generateNewFilename')) {
+		if ($userFunc.setUserFunction($scope.editorCode, 'generateNewFilepath')) {
 			$scope.safeApply();
 		}
 		$rootScope.validUserFunction = $userFunc.validUserFunction;
 	}
 
 	$userFunc.setWrapperFunction(function(userFunction, file, actualRun) {
-		var newName = userFunction(file.name);
+		var newPath = userFunction(file.path);
 		if (actualRun) {
-			if (typeof newName == 'string') $fs.renameFile(file.name, newName, file.path);
+			if (typeof newPath == 'string') $fs.renamePath(file.path, newPath);
 		} else {
-			return newName;
+			return userFunction(file.path);
 		}
 	});
 

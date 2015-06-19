@@ -12,7 +12,15 @@ angular
 	$routeProvider
 	.when('/rename', {
 		controller: 'RenameCtrl',
-		templateUrl: 'templates/editor/rename.html',
+		templateUrl: 'templates/editor/editor.html',
+	})
+	.when('/move', {
+		controller: 'MoveCtrl',
+		templateUrl: 'templates/editor/editor.html',
+	})
+	.when('/exec', {
+		controller: 'ExecCtrl',
+		templateUrl: 'templates/editor/editor.html',
 	})
 	.otherwise('/rename');
 });
