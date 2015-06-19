@@ -33,7 +33,10 @@ angular.module('FileOperator')
 	}
 
 	$userFunc.setWrapperFunction(function(userFunction, file, actualRun) {
-		var newPath = userFunction(file.path);
+		var path = file.path;
+		var name = file.name;
+		var directoryPath = path.substr(0, path.length - name.length);
+		var newPath = userFunction(directoryPath, name);
 		if (actualRun) {
 			if (typeof newPath == 'string') $fs.renamePath(file.path, newPath);
 		} else {
