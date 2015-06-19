@@ -1,4 +1,4 @@
-angular.module('holder', []).directive('holder', ['$window', function($window){
+angular.module('holder', []).directive('holder', ['$fs', function($fs){
 	return {
 		restrict: 'AE',
 		link: function(scope, element, attrs) {
@@ -17,6 +17,18 @@ angular.module('holder', []).directive('holder', ['$window', function($window){
 
 			scope.addFile = function(file) {
 				console.log(file, file.name, file.path);
+
+				if (file.path) {
+					var stat = $fs.stat(file.path);
+					if (stat && stat.isDirectory()) {
+						var files = $fs.getFiles(file.path);
+						for (var i = 0; i < files.length; ++i) {
+							scope.addFile(files[i]);
+						}
+						return;
+					}
+				}
+
 				var file_id = file.path || file.name;
 				if (fileIds.indexOf(file_id) == -1) {
 					scope.files.push(file);

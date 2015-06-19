@@ -19,6 +19,24 @@ angular.module('$fs', []).factory('$fs', [function(){
 				var newPath = path.dirname(oldPath) + '/' + newName;
 				this.renamePath(oldPath, newPath);
 			}
+		},
+		stat: function(path) {
+			if (fs) {
+				return fs.statSync(path);
+			} else return null;
+		},
+		getFiles: function(path) {
+			if (fs) {
+				var filenames = fs.readdirSync(path);
+				var files = [];
+				for (var i = 0; i < filenames.length; i++) {
+					files.push({
+						name: filenames[i],
+						path: path + '/' + filenames[i],
+					});
+				};
+				return files;
+			} else return null;
 		}
 	}
 }]);
