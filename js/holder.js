@@ -1,45 +1,10 @@
-angular.module('holder', []).directive('holder', ['$fs', function($fs){
+angular.module('holder', ['$fileList']).directive('holder', ['$fileList', function($fileList){
 	return {
 		restrict: 'AE',
 		link: function(scope, element, attrs) {
 			// prevent default behavior from changing page on dropped file
 			window.ondragover = function(e) { e.preventDefault(); return false };
 			window.ondrop = function(e) { e.preventDefault(); return false };
-
-			scope.files = [];
-			var fileIds = [];
-
-			// clear all files from the array
-			scope.clearFiles = function() {
-				scope.files = [];
-				fileIds = [];
-			};
-
-			scope.removeFile = function(index) {
-				scope.files.pop(index);
-				fileIds.pop(index);
-			};
-
-			scope.addFile = function(file) {
-				console.log(file, file.name, file.path);
-
-				if (file.path) {
-					var stat = $fs.stat(file.path);
-					if (stat && stat.isDirectory()) {
-						var files = $fs.getFiles(file.path);
-						for (var i = 0; i < files.length; ++i) {
-							scope.addFile(files[i]);
-						}
-						return;
-					}
-				}
-
-				var file_id = file.path || file.name;
-				if (fileIds.indexOf(file_id) == -1) {
-					scope.files.push(file);
-					fileIds.push(file_id); // prevent duplicates
-				}
-			}
 
 			element.on('dragover', function () {
 				angular.element(this).addClass('file-hover');
@@ -55,7 +20,7 @@ angular.module('holder', []).directive('holder', ['$fs', function($fs){
 				e.preventDefault();
 				angular.element(this).removeClass('file-hover');
 				for (var i = 0; i < e.dataTransfer.files.length; ++i) {
-					scope.addFile(e.dataTransfer.files[i]);
+					$fileList.addFile(e.dataTransfer.files[i]);
 				}
 				scope.$apply();
 				return false;
