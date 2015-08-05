@@ -5,3 +5,5 @@ set of files and modify these.
 
 To run the Project you need nw.js.
 This Program is designed to work with  Version 0.12.2 of nw.js.
+
+![Screenshot of the Application in Rename Mode](https://jansim.github.io/FileOperator/img/screenshot_rename.png)
